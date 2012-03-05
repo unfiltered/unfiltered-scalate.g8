@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 A [giter8][g8] template for [Unfiltered][unfiltered] applications with Scalate, Jetty, and [avsl][avsl] logging.
 
 [g8]: http://github.com/n8han/giter8#readme
@@ -11,4 +10,3 @@ A [giter8][g8] template for [Unfiltered][unfiltered] applications with [avsl][av
 [unfiltered]: http://unfiltered.databinder.net/Unfiltered.html
 [avsl]: http://bmc.github.com/avsl/
 [sbt]: http://github.com/harrah/xsbt/wiki
->>>>>>> a7fed217f6025b3dcbff1253aebc797e3ca75f01
