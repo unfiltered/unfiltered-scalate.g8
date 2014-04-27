@@ -30,10 +30,9 @@ object Scalate {
         }
         engine.layout(scalateTemplate, context)
       } catch {
-        case e if engine.isDevelopmentMode =>
+        case e: Exception if engine.isDevelopmentMode =>
           printWriter.println("Exception: " + e.getMessage)
           e.getStackTrace.foreach(printWriter.println)
-        case e => throw e
       }
     }
   }
