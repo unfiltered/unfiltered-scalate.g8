@@ -1,8 +1,9 @@
-A [giter8][g8] template for [Unfiltered][unfiltered] applications with Scalate, Jetty, and [avsl][avsl] logging.
+A [giter8][g8] template for [Unfiltered][unfiltered] applications with Scalate, Jetty.
+
+[![Build Status](https://secure.travis-ci.org/unfiltered/unfiltered-scalate.g8.png)](http://travis-ci.org/unfiltered/unfiltered-scalate.g8)
 
 [g8]: http://github.com/n8han/giter8#readme
 [unfiltered]: http://github.com/n8han/unfiltered#readme
-[avsl]: http://bmc.github.com/avsl/
 
 
     g8 unfiltered/unfiltered-scalate

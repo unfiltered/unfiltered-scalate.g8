@@ -3,20 +3,14 @@ package com.example
 import unfiltered.request._
 import unfiltered.response._
 
-import org.clapper.avsl.Logger
-
 /** unfiltered plan */
 class App extends unfiltered.filter.Plan {
   import QParams._
 
-  val logger = Logger(classOf[App])
-
   def intent = {
     case req@GET(Path(p)) =>
-      logger.debug("GET %s" format p)
       view(req, "body" -> "What say you?")
     case req@POST(Path(p) & Params(params)) =>
-      logger.debug("POST %s" format p)
       val expected = for {
         int <- lookup("int") is
           int { _ + " is not an integer" } is
@@ -45,7 +39,6 @@ class App extends unfiltered.filter.Plan {
 
 /** embedded server */
 object Server {
-  val logger = Logger(Server.getClass)
   def main(args: Array[String]) {
     val http = unfiltered.jetty.Http.anylocal
     http.context("/assets") { _.resources(
@@ -53,7 +46,6 @@ object Server {
     ) }.filter(new App).run({ svr =>
         unfiltered.util.Browser.open(http.url)
       }, { svr =>
-        logger.info("shutting down server")
       })
   }
 }
