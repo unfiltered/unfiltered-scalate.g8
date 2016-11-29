@@ -11,7 +11,3 @@ libraryDependencies ++= Seq(
   "net.databinder" %% "unfiltered-jetty" % "$unfiltered_version$",
   "org.scalatra.scalate" %% "scalate-core" % "$scalate_version$"
 )
-
-resolvers ++= Seq(
-  "java m2" at "http://download.java.net/maven/2"
-)

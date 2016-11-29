@@ -2,8 +2,8 @@ A [giter8][g8] template for [Unfiltered][unfiltered] applications with Scalate, 
 
 [![Build Status](https://secure.travis-ci.org/unfiltered/unfiltered-scalate.g8.png)](http://travis-ci.org/unfiltered/unfiltered-scalate.g8)
 
-[g8]: http://github.com/n8han/giter8#readme
-[unfiltered]: http://github.com/n8han/unfiltered#readme
+[g8]: http://github.com/foundweekends/giter8#readme
+[unfiltered]: http://github.com/unfiltered/unfiltered#readme
 
 
     g8 unfiltered/unfiltered-scalate
@@ -17,7 +17,7 @@ in this template project.
 
 ## Getting Started
 
-Integrating [Scalate](http://scalate.fusesource.org/) templates into your Unfiltered app is dead simple with the Unfiltered Scalate Module.  Here is a quick and dirty example.
+Integrating [Scalate](https://scalate.github.io/scalate/) templates into your Unfiltered app is dead simple with the Unfiltered Scalate Module.  Here is a quick and dirty example.
 
     import unfiltered.request._
     import unfiltered.response._

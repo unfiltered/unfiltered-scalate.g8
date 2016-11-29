@@ -40,11 +40,10 @@ class App extends unfiltered.filter.Plan {
 /** embedded server */
 object Server {
   def main(args: Array[String]) {
-    val http = unfiltered.jetty.Http.anylocal
+    val http = unfiltered.jetty.Server.anylocal
     http.context("/assets") { _.resources(
       new java.net.URL(getClass().getResource("/www/css"), ".")
     ) }.filter(new App).run({ svr =>
-        unfiltered.util.Browser.open(http.url)
       }, { svr =>
       })
   }
