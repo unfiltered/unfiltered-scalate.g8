@@ -23,11 +23,11 @@ Integrating [Scalate](https://scalate.github.io/scalate/) templates into your Un
 import unfiltered.request._
 import unfiltered.response._
 import unfiltered.jetty._
-import unfiltered.scalate._
 
 object Server{
-  def main(args: Array[String]){
-    val server = Http(8080).filter(unfiltered.filter.Planify {
+  def main(args: Array[String]): Unit = {
+    val binding = SocketPortBinding(host = "localhost", port = 8080)
+    val server = unfiltered.jetty.Server.portBinding(binding).plan(unfiltered.filter.Planify {
       case req => Ok ~> Scalate(req, "hello.ssp")
     }).run
   }
@@ -48,10 +48,12 @@ Next you probably want to serve static assets, like images, css, and javascript 
 
 ```scala
 object Server{
-  def main(args: Array[String]){
-    Http(8080).context("/public"){ ctx: ContextBuilder =>
+  def main(args: Array[String]): Unit = {
+    val binding = SocketPortBinding(host = "localhost", port = 8080)
+    val server = unfiltered.jetty.Server.portBinding(binding)
+    server.context("/public"){ ctx =>
       ctx.resources(new java.net.URL("file:///Users/molecule/development/scalate_demo/src/main/resources/public"))
-    }.filter(unfiltered.filter.Planify {
+    }.plan(unfiltered.filter.Planify {
       case req => Ok ~> Scalate(req, "hello.ssp")
     }).run
   }
@@ -68,22 +70,21 @@ now you can reference static assets from your template like /public/main.css or 
 If you wish to move your templates somewhere else, or you want to configure the org.fusesource.scalate.TemplateEngine for production use, you can create your own TemplateEngine and pass it to the secondary parameters set manually:
 
 ```scala
-import unfiltered.request._
 import unfiltered.response._
 import unfiltered.jetty._
-import unfiltered.scalate.Scalate
 import org.fusesource.scalate.TemplateEngine
 
 object Server{
-  def main(args: Array[String]){
-    
+  def main(args: Array[String]): Unit = {
     val templateDirs = List(new java.io.File("/my/own/template/dirs"))
     val scalateMode = "production"
     val engine = new TemplateEngine(templateDirs, scalateMode)
     
-    Http(8080).context("/public"){ ctx: ContextBuilder =>
+    val binding = SocketPortBinding(host = "localhost", port = 8080)
+    val server = unfiltered.jetty.Server.portBinding(binding)
+    server.context("/public"){ ctx =>
       ctx.resources(new java.net.URL("file:///Users/molecule/development/scalate_demo/src/main/resources/public"))
-    }.filter(unfiltered.filter.Planify {
+    }.plan(unfiltered.filter.Planify {
       case req => Ok ~> Scalate(req, "hello.ssp")(engine)
     }).run
   }
@@ -95,61 +96,11 @@ or the TemplateEngine can be implicit:
 ```scala
 implicit val engine = new TemplateEngine(templateDirs, scalateMode)
 
-Http(8080).context("/public"){ ctx: ContextBuilder =>
+val binding = SocketPortBinding(host = "localhost", port = 8080)
+val server = unfiltered.jetty.Server.portBinding(binding)
+server.context("/public"){ ctx =>
   ctx.resources(new java.net.URL("file:///Users/molecule/development/scalate_demo/src/main/resources/public"))
-}.filter(unfiltered.filter.Planify {
+}.plan(unfiltered.filter.Planify {
   case req => Ok ~> Scalate(req, "hello.ssp")
 }).run
-```
-
-### Default Bindings and Attributes
-
-Also, you can include defaultBindings.  This is if you expect something will be needed on all pages:
-
-```scala
-import unfiltered.request._
-import unfiltered.response._
-import unfiltered.jetty._
-import unfiltered.scalate.Scalate
-import org.fusesource.scalate.{TemplateEngine, Binding}
-
-object Server{
-  def main(args: Array[String]){
-    
-    val templateDirs = List(new java.io.File("/my/own/template/dirs"))
-    val scalateMode = "production"
-    val engine = new TemplateEngine(templateDirs, scalateMode)
-    
-    val bindings: List[Binding] = List(Binding(name = "foo", className = "String"))
-    val additionalAttributes = List(("foo", "bar"))
-    
-    Http(8080).context("/public"){ ctx: ContextBuilder =>
-      ctx.resources(new java.net.URL("file:///Users/molecule/development/scalate_demo/src/main/resources/public"))
-    }.filter(unfiltered.filter.Planify {
-      case req => Ok ~> Scalate(req, "hello.ssp")(engine, bindings, additionalAttributes)
-    }).run
-  }
-}
-```
-
-And the bindings and attributes can be implicit as well:
-
-```scala
-object Server{
-  def main(args: Array[String]){
-    
-    val templateDirs = List(new java.io.File("/my/own/template/dirs"))
-    val scalateMode = "production"
-    implicit val engine = new TemplateEngine(templateDirs, scalateMode)
-    
-    implicit val bindings: List[Binding] = List(Binding(name = "foo", className = "String"))
-    implicit val additionalAttributes = List(("foo", "bar"))
-    
-    Http(8080).context("/public"){ ctx: ContextBuilder =>
-      ctx.resources(new java.net.URL("file:///Users/molecule/development/scalate_demo/src/main/resources/public"))
-    }.filter(unfiltered.filter.Planify {
-      case req => Ok ~> Scalate(req, "hello.ssp")
-    }).run
-  }
-}
 ```
