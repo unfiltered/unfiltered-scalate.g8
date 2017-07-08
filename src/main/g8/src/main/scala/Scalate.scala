@@ -20,7 +20,7 @@ object Scalate {
     bindings: List[Binding] = Nil,
     additionalAttributes: Seq[(String, Any)] = Nil
   ) = new ResponseWriter {
-    def write(writer: OutputStreamWriter) {
+    def write(writer: OutputStreamWriter): Unit = {
       val printWriter = new PrintWriter(writer)
       try {
         val scalateTemplate = engine.load(template, bindings)

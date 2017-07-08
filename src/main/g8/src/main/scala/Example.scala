@@ -1,7 +1,6 @@
 package com.example
 
 import unfiltered.request._
-import unfiltered.response._
 
 /** unfiltered plan */
 class App extends unfiltered.filter.Plan {
@@ -39,11 +38,11 @@ class App extends unfiltered.filter.Plan {
 
 /** embedded server */
 object Server {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val http = unfiltered.jetty.Server.anylocal
     http.context("/assets") { _.resources(
       new java.net.URL(getClass().getResource("/www/css"), ".")
-    ) }.filter(new App).run({ svr =>
+    ) }.plan(new App).run({ svr =>
       }, { svr =>
       })
   }
