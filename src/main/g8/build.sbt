@@ -8,7 +8,6 @@ scalaVersion := "$scala_version$"
 
 val unusedWarnings = (
   "-Ywarn-unused" ::
-  "-Ywarn-unused-import" ::
   Nil
 )
 
