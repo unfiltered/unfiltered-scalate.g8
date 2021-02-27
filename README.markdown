@@ -1,7 +1,7 @@
 A [giter8][g8] template for [Unfiltered][unfiltered] applications with Scalate, Jetty.
 
-[g8]: http://github.com/foundweekends/giter8#readme
-[unfiltered]: http://github.com/unfiltered/unfiltered#readme
+[g8]: https://github.com/foundweekends/giter8#readme
+[unfiltered]: https://github.com/unfiltered/unfiltered#readme
 
 
     g8 unfiltered/unfiltered-scalate
