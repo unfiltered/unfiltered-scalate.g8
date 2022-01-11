@@ -13,7 +13,7 @@ jobs:
         include:
           - scala: 2.11.12
           - scala: 2.12.15
-          - scala: 2.13.7
+          - scala: 2.13.8
     steps:
     - uses: olafurpg/setup-scala@v13
       with:
