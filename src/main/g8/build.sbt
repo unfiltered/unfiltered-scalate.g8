@@ -11,6 +11,8 @@ val unusedWarnings = (
   Nil
 )
 
+libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % "always"
+
 scalacOptions ++= PartialFunction.condOpt(CrossVersion.partialVersion(scalaVersion.value)){
   case Some((2, v)) if v >= 11 => unusedWarnings
 }.toList.flatten
