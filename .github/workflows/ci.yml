@@ -18,6 +18,7 @@ jobs:
         distribution: temurin
     - uses: actions/checkout@v4
     - uses: coursier/cache-action@v6
+    - uses: sbt/setup-sbt@v1
     - run: sbt -v
            "set Test / g8 / g8Properties ~= { _ + (\"scala_version\" -> \"${{ matrix.scala }}\")}"
            g8Test
