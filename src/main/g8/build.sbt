@@ -21,7 +21,7 @@ Seq(Compile, Test).flatMap(c =>
   c / console / scalacOptions --= unusedWarnings
 )
 
-scalacOptions ++= "-deprecation" :: "unchecked" :: "-feature" :: "-Xfuture" :: Nil
+scalacOptions ++= "-deprecation" :: "unchecked" :: "-feature" :: Nil
 
 val unfilteredVersion = "$unfiltered_version$"
 
