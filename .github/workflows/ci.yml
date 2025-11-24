@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - scala: 2.12.20
+          - scala: 2.13.18
           - scala: 2.13.16
     steps:
     - uses: actions/setup-java@v5
