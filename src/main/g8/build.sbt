@@ -12,6 +12,7 @@ val unusedWarnings = (
 )
 
 libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % "always"
+libraryDependencySchemes += "org.scala-lang.modules" %% "scala-parser-combinators" % "always"
 
 scalacOptions ++= PartialFunction.condOpt(CrossVersion.partialVersion(scalaVersion.value)){
   case Some((2, v)) if v >= 11 => unusedWarnings
