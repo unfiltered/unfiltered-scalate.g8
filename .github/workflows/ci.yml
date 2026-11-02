@@ -19,7 +19,7 @@ jobs:
         java-version: 17
         distribution: temurin
     - uses: actions/checkout@v7
-    - uses: coursier/cache-action@v8
+    - uses: coursier/cache-action@v9
     - uses: sbt/setup-sbt@v1
     - run: sbt -v
            --server
